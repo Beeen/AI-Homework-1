@@ -1,0 +1,90 @@
+"""HikerAPI client for Instagram account discovery."""
+
+import os
+from typing import Any, Dict, List, Optional
+
+import httpx
+
+HIKER_API_BASE_URL = "https://api.hikerapi.com"
+
+
+def _get_hiker_headers() -> Dict[str, str]:
+    """Build request headers with the HikerAPI access key."""
+    api_key = os.getenv("HIKER_API_KEY")
+    if not api_key:
+        raise RuntimeError("HIKER_API_KEY environment variable is not set")
+    return {
+        "x-access-key": api_key,
+        "accept": "application/json",
+    }
+
+
+def search_instagram_accounts(query: str) -> List[Dict[str, Any]]:
+    """Search Instagram accounts by name/keyword via HikerAPI.
+
+    Uses the ``/v2/search/accounts`` endpoint (fbsearch_accounts_v2).
+
+    Args:
+        query: Search term (e.g. entity name like "Mr. Scruff").
+
+    Returns:
+        List of account dicts with keys like ``pk``, ``username``,
+        ``full_name``, ``biography``, ``profile_pic_url``,
+        ``follower_count``, ``is_verified``.
+        Returns an empty list when the API key is missing or the request fails.
+    """
+    try:
+        headers = _get_hiker_headers()
+    except RuntimeError:
+        print("[HIKER] API key not configured, skipping Instagram search")
+        return []
+
+    try:
+        with httpx.Client(timeout=15.0) as client:
+            resp = client.get(
+                f"{HIKER_API_BASE_URL}/v2/search/accounts",
+                params={"query": query},
+                headers=headers,
+            )
+            resp.raise_for_status()
+            data = resp.json()
+
+            # The response may be a list directly or wrapped in a key
+            if isinstance(data, list):
+                return data
+            if isinstance(data, dict):
+                return data.get("users") or data.get("results") or []
+            return []
+    except Exception as e:
+        print(f"[HIKER] Instagram search failed for '{query}': {e}")
+        return []
+
+
+def get_instagram_profile(user_id: str) -> Optional[Dict[str, Any]]:
+    """Fetch a detailed Instagram profile by numeric user ID.
+
+    Uses the ``/v1/user/by/id`` endpoint.
+
+    Args:
+        user_id: Instagram numeric user ID (``pk``).
+
+    Returns:
+        Profile dict or ``None`` on failure.
+    """
+    try:
+        headers = _get_hiker_headers()
+    except RuntimeError:
+        return None
+
+    try:
+        with httpx.Client(timeout=15.0) as client:
+            resp = client.get(
+                f"{HIKER_API_BASE_URL}/v1/user/by/id",
+                params={"id": user_id},
+                headers=headers,
+            )
+            resp.raise_for_status()
+            return resp.json()
+    except Exception as e:
+        print(f"[HIKER] Profile fetch failed for user_id={user_id}: {e}")
+        return None

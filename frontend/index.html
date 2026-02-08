@@ -111,7 +111,7 @@
                     <div class="pl-4 text-zinc-500 flex items-center">
                         <iconify-icon icon="solar:link-linear" width="20" stroke-width="1.5"></iconify-icon>
                     </div>
-                    <input type="text" placeholder="https://soundcloud.com/artist-name..." class="w-full bg-transparent border-none text-white text-sm px-4 py-4 placeholder-zinc-600 font-mono">
+                    <input type="text" placeholder="https://ra.co/dj/artist-name..." class="w-full bg-transparent border-none text-white text-sm px-4 py-4 placeholder-zinc-600 font-mono">
                     <button class="mr-1.5 px-4 py-2 bg-white text-black text-xs font-medium rounded hover:bg-zinc-200 transition-colors flex items-center gap-2">
                         Enrich
                         <iconify-icon icon="solar:arrow-right-linear" width="16"></iconify-icon>
@@ -119,8 +119,8 @@
                 </div>
                 <div class="mt-3 flex items-center justify-center gap-4 text-xs text-zinc-600">
                     <span class="flex items-center gap-1"><iconify-icon icon="solar:check-circle-linear" class="text-zinc-500"></iconify-icon> Artists</span>
-                    <span class="flex items-center gap-1"><iconify-icon icon="solar:check-circle-linear" class="text-zinc-500"></iconify-icon> Labels</span>
                     <span class="flex items-center gap-1"><iconify-icon icon="solar:check-circle-linear" class="text-zinc-500"></iconify-icon> Venues</span>
+                    <span class="flex items-center gap-1"><iconify-icon icon="solar:check-circle-linear" class="text-zinc-500"></iconify-icon> Promoters</span>
                 </div>
             </div>
         </div>
@@ -145,57 +145,62 @@
                             <div class="flex gap-2 text-zinc-600">
                                 <span>10:42:01</span>
                                 <span class="text-blue-500">INFO</span>
-                                <span>Input received: soundcloud.com/four-tet</span>
+                                <span>Input received: ra.co/dj/fourtet</span>
                             </div>
                             <div class="flex gap-2 text-zinc-600">
-                                <span>10:42:02</span>
+                                <span>10:42:01</span>
                                 <span class="text-purple-500">SCAN</span>
-                                <span>Resolving entity ID...</span>
+                                <span>Parsing RA URL &rarr; artist/fourtet</span>
                             </div>
                             <div class="flex gap-2 text-zinc-600">
                                 <span>10:42:02</span>
-                                <span class="text-green-500">FOUND</span>
-                                <span>Match: Four Tet (UK)</span>
-                            </div>
-                            <div class="flex gap-2 text-zinc-600">
-                                <span>10:42:03</span>
                                 <span class="text-purple-500">CRAWL</span>
-                                <span>Querying Resident Advisor...</span>
+                                <span>Fetching RA GraphQL via proxy...</span>
                             </div>
                             <div class="flex gap-2 text-zinc-600">
                                 <span>10:42:03</span>
                                 <span class="text-green-500">FOUND</span>
-                                <span>Bio extracted (145 words)</span>
+                                <span>Four Tet (United Kingdom)</span>
+                            </div>
+                            <div class="flex gap-2 text-zinc-600">
+                                <span>10:42:03</span>
+                                <span class="text-purple-500">SCAN</span>
+                                <span>Gap analysis: missing instagram, soundcloud</span>
                             </div>
                             <div class="flex gap-2 text-zinc-600">
                                 <span>10:42:04</span>
                                 <span class="text-purple-500">CRAWL</span>
-                                <span>Locating Bandcamp...</span>
+                                <span>Searching Instagram via HikerAPI...</span>
                             </div>
                             <div class="flex gap-2 text-zinc-600">
                                 <span>10:42:04</span>
-                                <span class="text-green-500">FOUND</span>
-                                <span>fourtet.bandcamp.com</span>
-                            </div>
-                            <div class="flex gap-2 text-zinc-600">
-                                <span>10:42:05</span>
                                 <span class="text-purple-500">CRAWL</span>
-                                <span>Locating Discogs...</span>
+                                <span>Searching SoundCloud API...</span>
                             </div>
                             <div class="flex gap-2 text-zinc-600">
                                 <span>10:42:05</span>
                                 <span class="text-green-500">FOUND</span>
-                                <span>Release count: 48</span>
+                                <span>Instagram: @fourtetkieran (92% match)</span>
+                            </div>
+                            <div class="flex gap-2 text-zinc-600">
+                                <span>10:42:05</span>
+                                <span class="text-green-500">FOUND</span>
+                                <span>SoundCloud: four-tet (95% match)</span>
                             </div>
                             <div class="flex gap-2 text-zinc-600">
                                 <span>10:42:06</span>
                                 <span class="text-yellow-500">ASYNC</span>
-                                <span>Image processing complete</span>
+                                <span>Profile picture resolved (instagram)</span>
+                            </div>
+                            <div class="flex gap-2 text-zinc-600">
+                                <span>10:42:06</span>
+                                <span class="text-yellow-500">ASYNC</span>
+                                <span>Biography resolved (ra)</span>
                             </div>
                              <div class="flex gap-2 text-zinc-600 border-t border-dashed border-zinc-800 pt-2 mt-2">
                                 <span>10:42:07</span>
                                 <span class="text-white">DONE</span>
-                                <span>Enrichment ratio: 98%</span>
+                                <span>Enrichment complete: 14 fields</span>
                             </div>
                         </div>
                          <div class="absolute bottom-0 left-0 w-full h-24 bg-gradient-to-t from-[#0A0A0A] to-transparent z-10 pointer-events-none"></div>
@@ -213,55 +218,53 @@
                         </div>
                     </div>
                     
-                    <div class="bg-zinc-900/30 border border-zinc-800 rounded-lg p-1 overflow-hidden backdrop-blur-sm">
+                    <div id="result-card" class="bg-zinc-900/30 border border-zinc-800 rounded-lg p-1 overflow-hidden backdrop-blur-sm">
                         <!-- Card Content -->
                         <div class="bg-black border border-zinc-800/50 rounded overflow-hidden">
                             <!-- Cover/Header -->
                             <div class="h-32 bg-zinc-900 relative border-b border-zinc-800">
-                                <div class="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1557683316-973673baf926?q=80&amp;w=2000&amp;auto=format&amp;fit=crop')] opacity-20 bg-cover bg-center mix-blend-luminosity"></div>
+                                <div id="cover-bg" class="absolute inset-0 opacity-20 bg-cover bg-center mix-blend-luminosity"></div>
                                 <div class="absolute bottom-4 left-6 flex items-end gap-4 translate-y-1/2 z-10">
                                     <div class="w-20 h-20 bg-zinc-800 rounded border-2 border-black flex items-center justify-center overflow-hidden">
-                                        <!-- Artist Image Placeholder -->
-                                        <img src="https://hoirqrkdgbmvpwutwuwj.supabase.co/storage/v1/object/public/assets/assets/917d6f93-fb36-439a-8c48-884b67b35381_1600w.jpg" class="w-full h-full object-cover grayscale" alt="Artist">
+                                        <iconify-icon id="profile-pic-placeholder" icon="solar:user-circle-linear" class="text-zinc-600 text-4xl"></iconify-icon>
+                                        <img id="profile-pic" src="" class="w-full h-full object-cover grayscale hidden" alt="Entity">
                                     </div>
                                     <div class="pb-1">
-                                        <h2 class="text-xl font-medium text-white tracking-tight">Four Tet</h2>
-                                        <p class="text-xs text-zinc-500">London, United Kingdom</p>
+                                        <h2 id="entity-name" class="text-xl font-medium text-white tracking-tight text-zinc-600">Awaiting input...</h2>
+                                        <p id="entity-location" class="text-xs text-zinc-500"></p>
                                     </div>
                                 </div>
                                 <div class="absolute top-4 right-4 flex gap-2">
-                                    <span class="px-2 py-0.5 rounded text-[10px] uppercase font-medium bg-zinc-800 text-zinc-400 border border-zinc-700">Electronic</span>
-                                    <span class="px-2 py-0.5 rounded text-[10px] uppercase font-medium bg-zinc-800 text-zinc-400 border border-zinc-700">IDM</span>
-                                    <span class="px-2 py-0.5 rounded text-[10px] uppercase font-medium bg-zinc-800 text-zinc-400 border border-zinc-700">Garage</span>
+                                    <span id="entity-type-badge" class="px-2 py-0.5 rounded text-[10px] uppercase font-medium bg-zinc-800 text-zinc-400 border border-zinc-700 hidden"></span>
                                 </div>
                             </div>
 
                             <!-- Body -->
                             <div class="pt-14 px-6 pb-6">
                                 <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-                                    
+
                                     <!-- Bio Column -->
                                     <div class="md:col-span-2 space-y-4">
                                         <div>
                                             <h3 class="text-xs font-mono text-zinc-500 uppercase mb-2">Biography</h3>
-                                            <p class="text-sm text-zinc-300 leading-relaxed font-light">
-                                                Kieran Hebden (born 1977), best known by the stage name Four Tet, is an English musician active in electronic music. He first came to prominence as a member of the post-rock band Fridge before establishing himself as a solo artist. <span class="text-zinc-600">[Source: Resident Advisor]</span>
+                                            <p id="entity-bio" class="text-sm text-zinc-300 leading-relaxed font-light">
+                                                <span class="text-zinc-600 italic">Paste a Resident Advisor URL above and click Enrich to see results here.</span>
                                             </p>
                                         </div>
-                                        
+
                                         <!-- Stats Grid -->
-                                        <div class="grid grid-cols-3 gap-2 mt-4">
+                                        <div id="stats-grid" class="grid grid-cols-3 gap-2 mt-4">
                                             <div class="p-3 border border-zinc-800 bg-zinc-900/20 rounded">
-                                                <div class="text-[10px] text-zinc-500 uppercase">Followers</div>
-                                                <div class="text-sm text-white font-mono mt-1">482K</div>
+                                                <div class="text-[10px] text-zinc-500 uppercase">RA Followers</div>
+                                                <div class="text-sm text-zinc-600 font-mono mt-1">&mdash;</div>
                                             </div>
                                             <div class="p-3 border border-zinc-800 bg-zinc-900/20 rounded">
-                                                <div class="text-[10px] text-zinc-500 uppercase">Monthly</div>
-                                                <div class="text-sm text-white font-mono mt-1">2.1M</div>
+                                                <div class="text-[10px] text-zinc-500 uppercase">Fields Found</div>
+                                                <div class="text-sm text-zinc-600 font-mono mt-1">&mdash;</div>
                                             </div>
                                             <div class="p-3 border border-zinc-800 bg-zinc-900/20 rounded">
-                                                <div class="text-[10px] text-zinc-500 uppercase">Releases</div>
-                                                <div class="text-sm text-white font-mono mt-1">112</div>
+                                                <div class="text-[10px] text-zinc-500 uppercase">Time</div>
+                                                <div class="text-sm text-zinc-600 font-mono mt-1">&mdash;</div>
                                             </div>
                                         </div>
                                     </div>
@@ -269,31 +272,26 @@
                                     <!-- Links Column -->
                                     <div class="space-y-4">
                                         <h3 class="text-xs font-mono text-zinc-500 uppercase mb-2">Identities Found</h3>
-                                        <div class="space-y-2">
-                                            <div class="flex items-center gap-3 p-2 rounded border border-zinc-800/60 hover:bg-zinc-900/50 transition-colors group">
-                                                <iconify-icon icon="solar:music-library-2-linear" class="text-zinc-400 group-hover:text-white"></iconify-icon>
-                                                <span class="text-xs text-zinc-400 group-hover:text-white flex-grow">Spotify</span>
-                                                <iconify-icon icon="solar:arrow-right-up-linear" class="text-zinc-600 text-[10px]"></iconify-icon>
+                                        <div id="links-container" class="space-y-2">
+                                            <div class="flex items-center gap-3 p-2 rounded border border-zinc-800/30 opacity-40">
+                                                <iconify-icon icon="mdi:instagram" class="text-zinc-500"></iconify-icon>
+                                                <span class="text-xs text-zinc-500 flex-grow">Instagram</span>
+                                                <span class="text-[10px] text-zinc-600">Pending</span>
                                             </div>
-                                            <div class="flex items-center gap-3 p-2 rounded border border-zinc-800/60 hover:bg-zinc-900/50 transition-colors group">
-                                                <iconify-icon icon="solar:cloud-linear" class="text-zinc-400 group-hover:text-white"></iconify-icon>
-                                                <span class="text-xs text-zinc-400 group-hover:text-white flex-grow">SoundCloud</span>
-                                                <iconify-icon icon="solar:arrow-right-up-linear" class="text-zinc-600 text-[10px]"></iconify-icon>
+                                            <div class="flex items-center gap-3 p-2 rounded border border-zinc-800/30 opacity-40">
+                                                <iconify-icon icon="mdi:soundcloud" class="text-zinc-500"></iconify-icon>
+                                                <span class="text-xs text-zinc-500 flex-grow">SoundCloud</span>
+                                                <span class="text-[10px] text-zinc-600">Pending</span>
                                             </div>
-                                            <div class="flex items-center gap-3 p-2 rounded border border-zinc-800/60 hover:bg-zinc-900/50 transition-colors group">
-                                                <iconify-icon icon="solar:camera-linear" class="text-zinc-400 group-hover:text-white"></iconify-icon>
-                                                <span class="text-xs text-zinc-400 group-hover:text-white flex-grow">Instagram</span>
-                                                <iconify-icon icon="solar:arrow-right-up-linear" class="text-zinc-600 text-[10px]"></iconify-icon>
+                                            <div class="flex items-center gap-3 p-2 rounded border border-zinc-800/30 opacity-40">
+                                                <iconify-icon icon="solar:globe-linear" class="text-zinc-500"></iconify-icon>
+                                                <span class="text-xs text-zinc-500 flex-grow">Website</span>
+                                                <span class="text-[10px] text-zinc-600">Pending</span>
                                             </div>
-                                            <div class="flex items-center gap-3 p-2 rounded border border-zinc-800/60 hover:bg-zinc-900/50 transition-colors group">
-                                                <iconify-icon icon="solar:disk-linear" class="text-zinc-400 group-hover:text-white"></iconify-icon>
-                                                <span class="text-xs text-zinc-400 group-hover:text-white flex-grow">Discogs</span>
-                                                <iconify-icon icon="solar:arrow-right-up-linear" class="text-zinc-600 text-[10px]"></iconify-icon>
-                                            </div>
-                                            <div class="flex items-center gap-3 p-2 rounded border border-zinc-800/60 hover:bg-zinc-900/50 transition-colors group">
-                                                <iconify-icon icon="solar:cart-large-linear" class="text-zinc-400 group-hover:text-white"></iconify-icon>
-                                                <span class="text-xs text-zinc-400 group-hover:text-white flex-grow">Bandcamp</span>
-                                                <iconify-icon icon="solar:arrow-right-up-linear" class="text-zinc-600 text-[10px]"></iconify-icon>
+                                            <div class="flex items-center gap-3 p-2 rounded border border-zinc-800/30 opacity-40">
+                                                <iconify-icon icon="mdi:facebook" class="text-zinc-500"></iconify-icon>
+                                                <span class="text-xs text-zinc-500 flex-grow">Facebook</span>
+                                                <span class="text-[10px] text-zinc-600">Pending</span>
                                             </div>
                                         </div>
                                     </div>
@@ -317,7 +315,7 @@
                     </div>
                     <h4 class="text-sm font-medium text-white mb-2">Cross-Platform Resolution</h4>
                     <p class="text-xs text-zinc-500 leading-relaxed">
-                        Input a Spotify link, get their RA, Discogs, and Instagram. We maintain a graph of over 2M connections.
+                        Input a Resident Advisor link, get their Instagram, SoundCloud, and enriched profile data with confidence scoring.
                     </p>
                 </div>
 
@@ -361,11 +359,11 @@
 <pre><code><span class="text-purple-400">const</span> <span class="text-blue-400">signal</span> = <span class="text-purple-400">new</span> <span class="text-yellow-200">SignalClient</span>(<span class="text-green-400">'sk_live_...'</span>);
 
 <span class="text-purple-400">const</span> <span class="text-blue-400">artist</span> = <span class="text-purple-400">await</span> <span class="text-blue-400">signal</span>.<span class="text-yellow-200">enrich</span>({
-  url: <span class="text-green-400">'https://soundcloud.com/ben-ufo'</span>
+  url: <span class="text-green-400">'https://ra.co/dj/ben-ufo'</span>
 });
 
-console.<span class="text-yellow-200">log</span>(<span class="text-blue-400">artist</span>.socials.instagram);
-<span class="text-zinc-600">// Output: "https://instagram.com/benufo"</span></code></pre>
+console.<span class="text-yellow-200">log</span>(<span class="text-blue-400">artist</span>.instagram);
+<span class="text-zinc-600">// Output: "https://instagram.com/baborufo"</span></code></pre>
                  </div>
              </div>
         </div>
@@ -408,24 +406,37 @@ console.<span class="text-yellow-200">log</span>(<span class="text-blue-400">art
 
 
 <script>
-    // Data Enrichment Agent - Frontend Logic
+    // RA Enrichment Pipeline - Frontend Logic
     const API_BASE = window.location.origin;
-    
+
+    // Icon mapping for link fields
+    const LINK_ICONS = {
+        instagram: 'mdi:instagram',
+        soundcloud: 'mdi:soundcloud',
+        website: 'solar:globe-linear',
+        facebook: 'mdi:facebook',
+        twitter: 'mdi:twitter',
+        bandcamp: 'simple-icons:bandcamp',
+        discogs: 'simple-icons:discogs'
+    };
+
+    // Fields that represent clickable links
+    const LINK_FIELDS = ['instagram', 'soundcloud', 'website', 'facebook', 'twitter', 'bandcamp', 'discogs'];
+
     // DOM Elements
     const urlInput = document.querySelector('input[type="text"]');
     const enrichBtn = document.querySelector('button');
     const logContainer = document.querySelector('.font-mono.text-xs.leading-6');
-    const resultCard = document.querySelector('.lg\\:col-span-8');
-    
+
     // State
     let isLoading = false;
-    
+
     // Utility: Format timestamp
     function formatTime() {
         const now = new Date();
         return now.toTimeString().split(' ')[0];
     }
-    
+
     // Utility: Add log entry
     function addLog(type, message) {
         const colors = {
@@ -437,7 +448,7 @@ console.<span class="text-yellow-200">log</span>(<span class="text-blue-400">art
             'ERROR': 'text-red-500',
             'DONE': 'text-white'
         };
-        
+
         const logDiv = logContainer.querySelector('.space-y-2');
         const entry = document.createElement('div');
         entry.className = 'flex gap-2 text-zinc-600';
@@ -449,105 +460,148 @@ console.<span class="text-yellow-200">log</span>(<span class="text-blue-400">art
         logDiv.appendChild(entry);
         logContainer.scrollTop = logContainer.scrollHeight;
     }
-    
+
     // Clear logs
     function clearLogs() {
         const logDiv = logContainer.querySelector('.space-y-2');
         logDiv.innerHTML = '';
     }
-    
-    // Update result card
+
+    // Confidence dot color
+    function confidenceDot(confidence) {
+        if (confidence >= 0.8) return 'bg-emerald-500';
+        if (confidence >= 0.6) return 'bg-yellow-500';
+        return 'bg-red-500';
+    }
+
+    // Format large numbers (e.g. 48200 -> "48.2K")
+    function formatCount(n) {
+        if (n == null) return '—';
+        if (n >= 1000000) return (n / 1000000).toFixed(1) + 'M';
+        if (n >= 1000) return (n / 1000).toFixed(1) + 'K';
+        return String(n);
+    }
+
+    // Update result card with enrichment data
     function updateResultCard(data) {
-        const nameEl = document.querySelector('.text-xl.font-medium.text-white');
-        const bioEl = document.querySelector('.text-sm.text-zinc-300');
-        const linksContainer = document.querySelector('.space-y-2:last-child');
-        
-        // Update name
-        if (nameEl && data.entity_name) {
-            nameEl.textContent = data.entity_name;
+        const fields = data.enriched_fields || {};
+
+        // Profile picture
+        const profilePic = document.getElementById('profile-pic');
+        const profilePicPlaceholder = document.getElementById('profile-pic-placeholder');
+        const picUrl = fields.profile_picture?.value;
+        if (picUrl && profilePic) {
+            profilePic.src = picUrl;
+            profilePic.classList.remove('hidden');
+            profilePicPlaceholder.classList.add('hidden');
         }
-        
-        // Update bio
-        if (bioEl && data.enriched_fields?.biography?.value) {
-            const source = data.enriched_fields.biography.source || 'unknown';
-            bioEl.innerHTML = `${data.enriched_fields.biography.value} <span class="text-zinc-600">[Source: ${source}]</span>`;
+
+        // Cover image (use RA cover_picture if available)
+        const coverBg = document.getElementById('cover-bg');
+        const coverUrl = fields.cover_picture?.value;
+        if (coverUrl && coverBg) {
+            coverBg.style.backgroundImage = `url('${coverUrl}')`;
         }
-        
-        // Update links
-        if (linksContainer) {
-            const links = [];
-            
-            if (data.enriched_fields?.spotify?.value) {
-                links.push({ name: 'Spotify', icon: 'solar:music-library-2-linear', url: data.enriched_fields.spotify.value });
-            }
-            if (data.enriched_fields?.soundcloud?.value) {
-                links.push({ name: 'SoundCloud', icon: 'solar:cloud-linear', url: data.enriched_fields.soundcloud.value });
-            }
-            if (data.enriched_fields?.instagram?.value) {
-                links.push({ name: 'Instagram', icon: 'solar:camera-linear', url: data.enriched_fields.instagram.value });
-            }
-            if (data.enriched_fields?.website?.value) {
-                links.push({ name: 'Website', icon: 'solar:globe-linear', url: data.enriched_fields.website.value });
-            }
-            
-            linksContainer.innerHTML = links.map(link => `
-                <a href="${link.url}" target="_blank" class="flex items-center gap-3 p-2 rounded border border-zinc-800/60 hover:bg-zinc-900/50 transition-colors group">
-                    <iconify-icon icon="${link.icon}" class="text-zinc-400 group-hover:text-white"></iconify-icon>
-                    <span class="text-xs text-zinc-400 group-hover:text-white flex-grow">${link.name}</span>
-                    <iconify-icon icon="solar:arrow-right-up-linear" class="text-zinc-600 text-[10px]"></iconify-icon>
-                </a>
-            `).join('');
-            
-            // Add missing fields as disabled
-            data.missing_fields?.forEach(field => {
-                const icons = {
-                    'spotify': 'solar:music-library-2-linear',
-                    'soundcloud': 'solar:cloud-linear',
-                    'instagram': 'solar:camera-linear',
-                    'website': 'solar:globe-linear',
-                    'biography': 'solar:document-text-linear'
-                };
-                if (field !== 'biography') {
-                    linksContainer.innerHTML += `
-                        <div class="flex items-center gap-3 p-2 rounded border border-zinc-800/30 opacity-40">
-                            <iconify-icon icon="${icons[field] || 'solar:link-linear'}" class="text-zinc-500"></iconify-icon>
-                            <span class="text-xs text-zinc-500 flex-grow">${field.charAt(0).toUpperCase() + field.slice(1)}</span>
-                            <span class="text-[10px] text-zinc-600">Not found</span>
-                        </div>
-                    `;
-                }
-            });
+
+        // Name
+        const nameEl = document.getElementById('entity-name');
+        if (nameEl) {
+            nameEl.textContent = data.entity_name || 'Unknown';
+            nameEl.classList.remove('text-zinc-600');
         }
-        
-        // Update stats
-        const statsContainer = document.querySelector('.grid.grid-cols-3.gap-2');
-        if (statsContainer) {
-            const fieldsFound = Object.keys(data.enriched_fields || {}).length;
-            const totalFields = fieldsFound + (data.missing_fields?.length || 0);
-            const enrichmentRatio = totalFields > 0 ? Math.round((fieldsFound / totalFields) * 100) : 0;
-            
-            statsContainer.innerHTML = `
+
+        // Location
+        const locationEl = document.getElementById('entity-location');
+        if (locationEl) {
+            const city = fields.city?.value;
+            const country = fields.country?.value;
+            const parts = [city, country].filter(Boolean);
+            locationEl.textContent = parts.join(', ') || '';
+        }
+
+        // Entity type badge
+        const badge = document.getElementById('entity-type-badge');
+        if (badge && data.entity_type) {
+            badge.textContent = data.entity_type;
+            badge.classList.remove('hidden');
+        }
+
+        // Biography
+        const bioEl = document.getElementById('entity-bio');
+        if (bioEl) {
+            const bio = fields.biography?.value;
+            const bioSource = fields.biography?.source;
+            if (bio) {
+                bioEl.innerHTML = `${bio} <span class="text-zinc-600">[Source: ${bioSource || 'unknown'}]</span>`;
+            } else {
+                bioEl.innerHTML = '<span class="text-zinc-600 italic">No biography found.</span>';
+            }
+        }
+
+        // Stats
+        const statsGrid = document.getElementById('stats-grid');
+        if (statsGrid) {
+            const followerCount = fields.follower_count?.value;
+            const fieldsFound = Object.values(fields).filter(f => f && f.value).length;
+            const timeMs = data.processing_time_ms;
+
+            statsGrid.innerHTML = `
+                <div class="p-3 border border-zinc-800 bg-zinc-900/20 rounded">
+                    <div class="text-[10px] text-zinc-500 uppercase">RA Followers</div>
+                    <div class="text-sm text-white font-mono mt-1">${formatCount(followerCount)}</div>
+                </div>
                 <div class="p-3 border border-zinc-800 bg-zinc-900/20 rounded">
                     <div class="text-[10px] text-zinc-500 uppercase">Fields Found</div>
                     <div class="text-sm text-white font-mono mt-1">${fieldsFound}</div>
                 </div>
                 <div class="p-3 border border-zinc-800 bg-zinc-900/20 rounded">
-                    <div class="text-[10px] text-zinc-500 uppercase">Enrichment</div>
-                    <div class="text-sm text-white font-mono mt-1">${enrichmentRatio}%</div>
-                </div>
-                <div class="p-3 border border-zinc-800 bg-zinc-900/20 rounded">
                     <div class="text-[10px] text-zinc-500 uppercase">Time</div>
-                    <div class="text-sm text-white font-mono mt-1">${(data.processing_time_ms / 1000).toFixed(1)}s</div>
+                    <div class="text-sm text-white font-mono mt-1">${timeMs ? (timeMs / 1000).toFixed(1) + 's' : '—'}</div>
                 </div>
             `;
         }
+
+        // Links
+        const linksContainer = document.getElementById('links-container');
+        if (linksContainer) {
+            let html = '';
+
+            LINK_FIELDS.forEach(field => {
+                const info = fields[field];
+                const icon = LINK_ICONS[field] || 'solar:link-linear';
+                const label = field.charAt(0).toUpperCase() + field.slice(1);
+
+                if (info && info.value) {
+                    const conf = info.confidence != null ? info.confidence : 1;
+                    const dotColor = confidenceDot(conf);
+                    html += `
+                        <a href="${info.value}" target="_blank" rel="noopener" class="flex items-center gap-3 p-2 rounded border border-zinc-800/60 hover:bg-zinc-900/50 transition-colors group">
+                            <iconify-icon icon="${icon}" class="text-zinc-400 group-hover:text-white"></iconify-icon>
+                            <span class="text-xs text-zinc-400 group-hover:text-white flex-grow">${label}</span>
+                            <span class="w-2 h-2 rounded-full ${dotColor} inline-block" title="${Math.round(conf * 100)}% confidence"></span>
+                            <iconify-icon icon="solar:arrow-right-up-linear" class="text-zinc-600 text-[10px]"></iconify-icon>
+                        </a>
+                    `;
+                } else {
+                    html += `
+                        <div class="flex items-center gap-3 p-2 rounded border border-zinc-800/30 opacity-40">
+                            <iconify-icon icon="${icon}" class="text-zinc-500"></iconify-icon>
+                            <span class="text-xs text-zinc-500 flex-grow">${label}</span>
+                            <span class="text-[10px] text-zinc-600">Not found</span>
+                        </div>
+                    `;
+                }
+            });
+
+            linksContainer.innerHTML = html;
+        }
     }
-    
+
     // Enrich entity
     async function enrichEntity(url) {
         if (isLoading) return;
         isLoading = true;
-        
+
         clearLogs();
         enrichBtn.disabled = true;
         enrichBtn.innerHTML = `
@@ -557,45 +611,68 @@ console.<span class="text-yellow-200">log</span>(<span class="text-blue-400">art
             </svg>
             Enriching...
         `;
-        
-        addLog('INFO', `Input received: ${url}`);
-        addLog('SCAN', 'Resolving entity...');
-        
+
+        // Extract short path for display
+        const shortUrl = url.replace(/^https?:\/\/(www\.)?/, '');
+        addLog('INFO', `Input received: ${shortUrl}`);
+        addLog('SCAN', 'Parsing RA URL...');
+
         try {
             const response = await fetch(`${API_BASE}/enrich`, {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ url, entity_type: 'artist' })
+                body: JSON.stringify({ url })
             });
-            
+
             if (!response.ok) {
                 const error = await response.json();
                 throw new Error(error.detail || 'Enrichment failed');
             }
-            
+
             const data = await response.json();
-            
-            // Simulate agent logs from response
-            addLog('FOUND', `Match: ${data.entity_name} (${data.entity_type})`);
-            
-            data.agent_calls?.forEach(call => {
-                addLog('CRAWL', `${call.agent}: ${call.tool}()`);
+
+            // Log pipeline stages
+            addLog('CRAWL', 'Fetching RA GraphQL via proxy...');
+            addLog('FOUND', `${data.entity_name || 'Entity'} (${data.entity_type || 'unknown'})`);
+
+            // Log discovery agents
+            const fields = data.enriched_fields || {};
+            const missingFields = [];
+            LINK_FIELDS.slice(0, 2).forEach(f => {
+                if (!fields[f]?.value) missingFields.push(f);
             });
-            
-            Object.entries(data.enriched_fields || {}).forEach(([field, info]) => {
-                if (info.value) {
-                    addLog('FOUND', `${field}: ${info.source} (${Math.round(info.confidence * 100)}%)`);
+
+            if (missingFields.length > 0) {
+                addLog('SCAN', `Gap analysis: missing ${missingFields.join(', ')}`);
+                if (missingFields.includes('instagram')) {
+                    addLog('CRAWL', 'Searching Instagram via HikerAPI...');
+                }
+                if (missingFields.includes('soundcloud')) {
+                    addLog('CRAWL', 'Searching SoundCloud API...');
+                }
+            }
+
+            // Log found fields
+            Object.entries(fields).forEach(([field, info]) => {
+                if (info && info.value && LINK_FIELDS.includes(field)) {
+                    const conf = info.confidence != null ? Math.round(info.confidence * 100) : 100;
+                    addLog('FOUND', `${field}: ${info.source || 'ra'} (${conf}% match)`);
                 }
             });
-            
-            const fieldsFound = Object.keys(data.enriched_fields || {}).length;
-            const totalFields = fieldsFound + (data.missing_fields?.length || 0);
-            const ratio = totalFields > 0 ? Math.round((fieldsFound / totalFields) * 100) : 0;
-            
-            addLog('DONE', `Enrichment ratio: ${ratio}%`);
-            
+
+            // Log resolution
+            if (fields.profile_picture?.value) {
+                addLog('ASYNC', `Profile picture resolved (${fields.profile_picture.source || 'unknown'})`);
+            }
+            if (fields.biography?.value) {
+                addLog('ASYNC', `Biography resolved (${fields.biography.source || 'unknown'})`);
+            }
+
+            const fieldsFound = Object.values(fields).filter(f => f && f.value).length;
+            addLog('DONE', `Enrichment complete: ${fieldsFound} fields`);
+
             updateResultCard(data);
-            
+
         } catch (error) {
             addLog('ERROR', error.message);
             console.error('Enrichment error:', error);
@@ -608,7 +685,7 @@ console.<span class="text-yellow-200">log</span>(<span class="text-blue-400">art
             `;
         }
     }
-    
+
     // Event listeners
     enrichBtn.addEventListener('click', () => {
         const url = urlInput.value.trim();
@@ -616,7 +693,7 @@ console.<span class="text-yellow-200">log</span>(<span class="text-blue-400">art
             enrichEntity(url);
         }
     });
-    
+
     urlInput.addEventListener('keypress', (e) => {
         if (e.key === 'Enter') {
             const url = urlInput.value.trim();
