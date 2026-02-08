@@ -30,3 +30,19 @@ services:
         sync: false
       - key: ARIZE_API_KEY
         sync: false
+      - key: ENABLE_RAG
+        sync: false
+      - key: OPENAI_EMBED_MODEL
+        value: text-embedding-3-small
+      - key: BRIGHTDATA_PROXY_HOST
+        sync: false
+      - key: BRIGHTDATA_PROXY_USERNAME
+        sync: false
+      - key: BRIGHTDATA_PROXY_PASSWORD
+        sync: false
+      - key: HIKER_API_KEY
+        sync: false
+      - key: SOUNDCLOUD_CLIENT_ID
+        sync: false
+      - key: SOUNDCLOUD_CLIENT_SECRET
+        sync: false
